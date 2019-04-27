@@ -62,7 +62,14 @@ function concat_moves(arr_possible_moves, move_h, move_v) {
 ("use strict");
 
 exports.list_all_available_moves = function(req, res) {
-  var first_possible_moves = get_all_moves("c4");
+  // validate the position argument
+  var knight_position = req.query.position;
+  if (!knight_position || !/^[a-z]+[0-9]{1,2}$/.test(knight_position)) {
+    res.status(400).send("Position argument with bad formatting");
+    return;
+  }
+
+  var first_possible_moves = get_all_moves(knight_position);
   var second_possible_moves = [];
 
   first_possible_moves.forEach(function(position) {
@@ -74,3 +81,5 @@ exports.list_all_available_moves = function(req, res) {
   var all_moves = second_possible_moves.concat(first_possible_moves);
   res.json(all_moves);
 };
+
+// api/controllers/calculate_moves_controllers.js
