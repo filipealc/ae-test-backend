@@ -13,8 +13,7 @@ app.use(function(req, res) {
   res.status(404).send({ url: req.originalUrl + " is not a valid route" });
 });
 
-app.listen(port);
-
+module.exports = app.listen(port);
 console.log("Api started on port: " + port);
 
 // server.js

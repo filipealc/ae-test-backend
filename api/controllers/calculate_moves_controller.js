@@ -1,5 +1,10 @@
-var chess_lines = [1, 2, 3, 4, 5, 6, 7, 8];
-var chess_columns = ["a", "b", "c", "d", "e", "f", "g", "h"];
+("use strict");
+
+// although we only declare the columns this can be
+// used to validate all moves since the chess is a
+// square ant line and columns array's would have the
+// same size
+var chess_columns = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
 //2 squares horizontally and 1 square vertically OR 2 squares vertically and one square horizontally
 function get_all_moves(knight_position) {
@@ -32,6 +37,8 @@ function get_all_moves(knight_position) {
   return arr_possible_moves;
 }
 
+// this functions validates if it's a valid position by
+// testing if the move outbounds the array
 function validate_move(current_position, move_left, move_right) {
   var left_line_position =
     current_position - move_left >= 0 ? current_position - move_left : null;
@@ -59,17 +66,22 @@ function concat_moves(arr_possible_moves, move_h, move_v) {
   return arr_possible_moves;
 }
 
-("use strict");
+function distinct(value, index, self) {
+  return self.indexOf(value) === index;
+}
 
 exports.list_all_available_moves = function(req, res) {
   // validate the position argument
   var knight_position = req.query.position;
-  if (!knight_position || !/^[a-z]+[0-9]{1,2}$/.test(knight_position)) {
+  if (
+    !knight_position ||
+    !/^[A-Z]+[0-9]{1,2}$/.test(knight_position.toUpperCase())
+  ) {
     res.status(400).send("Position argument with bad formatting");
     return;
   }
 
-  var first_possible_moves = get_all_moves(knight_position);
+  var first_possible_moves = get_all_moves(knight_position.toUpperCase());
   var second_possible_moves = [];
 
   first_possible_moves.forEach(function(position) {
@@ -79,7 +91,7 @@ exports.list_all_available_moves = function(req, res) {
   });
 
   var all_moves = second_possible_moves.concat(first_possible_moves);
-  res.json(all_moves);
+  res.status(200).json(all_moves.filter(distinct));
 };
 
 // api/controllers/calculate_moves_controllers.js
