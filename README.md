@@ -51,6 +51,8 @@ Sample GET:
 
 ```
 URL: http://localhost:80?position=A1
+
+Expected Result: ["A1","A3","E1","E3","B4","D4","D2","A5","C1","C5","C2","B3"]
 ```
 
 ## Deployment on AWS
