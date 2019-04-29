@@ -85,6 +85,10 @@ Push the image to the repository
 docker push XXXX.dkr.ecr.us-east-1.amazonaws.com/ae-challenge-backend:latest
 ```
 
+## Main URLs/Links
+
+- [Production ](http://ae-challenge-backend-prod.us-east-1.elasticbeanstalk.com) - The production enviroment link
+
 ## Built With
 
 - [express](https://expressjs.com/) - The Web Framework
