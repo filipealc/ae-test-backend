@@ -50,8 +50,44 @@ npm run start
 Sample GET:
 
 ```
-URL: http://localhost:3000?position=A1
+URL: http://localhost:80?position=A1
 ```
+
+## Deployment on AWS
+
+Login in the aws container registry:
+
+```
+$(aws ecr --profile your_aws_profile get-login --registry-ids 569001192389 --no-include-email --region us-east-1)
+```
+
+Build the image in your local:
+
+```
+docker build -f lb_docker_file --tag=569001192389.dkr.ecr.us-east-1.amazonaws.com/ae-challenge-backend:latest .
+```
+
+To run locally the image:
+
+```
+docker run --name ae-challenge -p 80:80 569001192389.dkr.ecr.us-east-1.amazonaws.com/ae-challenge-backend:latest
+```
+
+To stop the locally running container and delete it:
+
+```
+docker container stop ae-challenge && docker container rm ae-challenge
+```
+
+Push the image to the repository
+
+```
+docker push 569001192389.dkr.ecr.us-east-1.amazonaws.com/ae-challenge-backend:latest
+```
+
+## Main URLs/Links
+
+- [Production ](http://ae-challenge-backend-prod.us-east-1.elasticbeanstalk.com) - The production enviroment link
 
 ## Built With
 
