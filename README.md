@@ -50,7 +50,39 @@ npm run start
 Sample GET:
 
 ```
-URL: http://localhost:3000?position=A1
+URL: http://localhost:80?position=A1
+```
+
+## Deployment on AWS
+
+Login in the aws container registry:
+
+```
+$(aws ecr --profile your_aws_profile get-login --registry-ids XXXX --no-include-email --region us-east-1)
+```
+
+Build the image in your local:
+
+```
+docker build -f lb_docker_file --tag=XXXX.dkr.ecr.us-east-1.amazonaws.com/ae-challenge-backend:latest .
+```
+
+To run locally the image:
+
+```
+docker run --name ae-challenge -p 80:80 XXXX.dkr.ecr.us-east-1.amazonaws.com/ae-challenge-backend:latest
+```
+
+To stop the locally running container and delete it:
+
+```
+docker container stop ae-challenge && docker container rm ae-challenge
+```
+
+Push the image to the repository
+
+```
+docker push XXXX.dkr.ecr.us-east-1.amazonaws.com/ae-challenge-backend:latest
 ```
 
 ## Built With
