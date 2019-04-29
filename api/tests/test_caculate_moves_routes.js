@@ -10,19 +10,19 @@ chai.use(chaiHttp);
 chai.should();
 describe("MovesRoutes", () => {
   describe("GET /", () => {
-    it("should inform missing parameter", done => {
+    it("should inform missing route", done => {
       chai
         .request(app)
-        .get("/")
+        .get("/chess/moves/")
         .end((err, res) => {
-          res.should.have.status(400);
+          res.should.have.status(404);
           done();
         });
     });
     it("should inform unformatted parameter", done => {
       chai
         .request(app)
-        .get(`/?A`)
+        .get(`/chess/moves/A`)
         .end((err, res) => {
           res.should.have.status(400);
           done();
@@ -31,7 +31,7 @@ describe("MovesRoutes", () => {
     it("should get the list of moves", done => {
       chai
         .request(app)
-        .get(`/?position=A1`)
+        .get(`/chess/moves/A1`)
         .end((err, res) => {
           res.should.have.status(200);
           const items_expected = [
