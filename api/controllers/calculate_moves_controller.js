@@ -72,7 +72,7 @@ function distinct(value, index, self) {
 
 exports.list_all_available_moves = function(req, res) {
   // validate the position argument
-  var knight_position = req.query.position;
+  var knight_position = req.params.position;
   if (
     !knight_position ||
     !/^[A-Z]+[0-9]{1,2}$/.test(knight_position.toUpperCase())
