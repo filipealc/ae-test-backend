@@ -50,7 +50,6 @@ describe("MovesRoutes", () => {
           ];
           chai.expect(res.body).to.have.members(items_expected);
           chai.expect(res.body).to.have.length(items_expected.length);
-          console.log(res.body);
           done();
         });
     });

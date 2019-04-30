@@ -43,7 +43,7 @@ function validate_move(current_position, move_left, move_right) {
   var left_line_position =
     current_position - move_left >= 0 ? current_position - move_left : null;
   var right_line_position =
-    current_position + move_right < 9 ? current_position + move_right : null;
+    current_position + move_right < 8 ? current_position + move_right : null;
   return [left_line_position, right_line_position];
 }
 
@@ -75,7 +75,7 @@ exports.list_all_available_moves = function(req, res) {
   var knight_position = req.params.position;
   if (
     !knight_position ||
-    !/^[A-Z]+[0-9]{1,2}$/.test(knight_position.toUpperCase())
+    !/^[A-H]+[1-8]{1,2}$/.test(knight_position.toUpperCase())
   ) {
     res.status(400).send("Position argument with bad formatting");
     return;
