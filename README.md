@@ -88,6 +88,12 @@ Push the image to the repository
 docker push 569001192389.dkr.ecr.us-east-1.amazonaws.com/ae-challenge-backend:latest
 ```
 
+Deploy to ElasticBeanstalk
+
+```
+eb deploy
+```
+
 ## Main URLs/Links
 
 - [Production ](http://ae-challenge-backend-prod.us-east-1.elasticbeanstalk.com) - The production enviroment link
